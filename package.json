@@ -1,0 +1,64 @@
+{
+  "name": "warehouse",
+  "version": "1.0.0",
+  "description": "Monorepo for warehouse orders-products projects",
+  "private": true,
+  "scripts": {
+    "ct": "git-cz",
+    "start:web": "lerna run start --scope=@warehouse/web",
+    "build:web": "lerna run build --scope=@warehouse/web",
+    "tslint:fix": "lerna run tslint:fix --scope=@warehouse/web",
+    "test": "lerna run test --scope=@warehouse/web",
+    "pre-commit": "yarn run tslint:fix && lint-staged",
+    "commitmsg": "commitlint -e $GIT_PARAMS",
+    "release": "lerna publish --conventional-commits --skip-npm --yes",
+    "pre-push": "yarn run tslint:fix && lint-staged && yarn run test && yarn run build:web"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^8.0.0",
+    "@commitlint/config-conventional": "^8.0.0",
+    "commitizen": "^3.1.1",
+    "cz-conventional-changelog": "^2.1.0",
+    "cz-lerna-changelog": "^2.0.2",
+    "husky": "^2.4.1",
+    "lerna": "^3.13.0",
+    "lerna-semantic-release": "^9.1.0",
+    "lint-staged": "^8.2.0",
+    "npm-check-updates": "^3.1.10",
+    "prettier": "^1.18.2",
+    "tslint": "^5.17.0",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-react": "^4.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn pre-commit",
+      "pre-push": "yarn pre-push"
+    }
+  },
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  },
+  "lint-staged": {
+    "{js,jsx,ts,tsx,json}": [
+      "prettier --write \"{,!(node_modules|dist|build|coverage)/**/}*.{js,jsx,ts,tsx,json}\"",
+      "git add"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/johinsDev/warehouse"
+  },
+  "author": "liftit",
+  "bugs": {
+    "url": "https://github.com/johinsDev/warehouse/issues"
+  },
+  "homepage": "https://github.com/johinsDev/warehouse#readme"
+}
