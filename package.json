@@ -12,7 +12,7 @@
     "pre-commit": "yarn run tslint:fix && lint-staged",
     "commitmsg": "commitlint -e $GIT_PARAMS",
     "release": "lerna publish --conventional-commits --skip-npm --yes",
-    "pre-push": "yarn run tslint:fix && lint-staged && yarn run test && yarn run build:web"
+    "pre-push": "yarn run tslint:fix && lint-staged  && yarn run build:web"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.0.0",
